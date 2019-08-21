@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.order.ssm.dao.JdstateMapper" >
+  <resultMap id="BaseResultMap" type="com.order.ssm.bean.Jdstate" >
+    <result column="xtaddr" property="xtaddr" jdbcType="VARCHAR" />
+    <result column="shuizhi" property="shuizhi" jdbcType="VARCHAR" />
+    <result column="fishnum" property="fishnum" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    xtaddr, shuizhi, fishnum
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.order.ssm.bean.JdstateExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from jdstate
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.order.ssm.bean.JdstateExample" >
+    delete from jdstate
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.order.ssm.bean.Jdstate" >
+    insert into jdstate (xtaddr, shuizhi, fishnum
+      )
+    values (#{xtaddr,jdbcType=VARCHAR}, #{shuizhi,jdbcType=VARCHAR}, #{fishnum,jdbcType=DOUBLE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.order.ssm.bean.Jdstate" >
+    insert into jdstate
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="xtaddr != null" >
+        xtaddr,
+      </if>
+      <if test="shuizhi != null" >
+        shuizhi,
+      </if>
+      <if test="fishnum != null" >
+        fishnum,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="xtaddr != null" >
+        #{xtaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="shuizhi != null" >
+        #{shuizhi,jdbcType=VARCHAR},
+      </if>
+      <if test="fishnum != null" >
+        #{fishnum,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.order.ssm.bean.JdstateExample" resultType="java.lang.Integer" >
+    select count(*) from jdstate
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update jdstate
+    <set >
+      <if test="record.xtaddr != null" >
+        xtaddr = #{record.xtaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shuizhi != null" >
+        shuizhi = #{record.shuizhi,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fishnum != null" >
+        fishnum = #{record.fishnum,jdbcType=DOUBLE},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update jdstate
+    set xtaddr = #{record.xtaddr,jdbcType=VARCHAR},
+      shuizhi = #{record.shuizhi,jdbcType=VARCHAR},
+      fishnum = #{record.fishnum,jdbcType=DOUBLE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>
